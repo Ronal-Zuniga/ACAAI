@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
       { path: 'inicio', loadChildren: () => import('./features/dashboard/dashboard/dashboard.module').then(m => m.DashboardModule) },
-      // Aquí irán las demás rutas hijas
+      { path: 'documentos', loadChildren: () => import('./features/documents/documents.module').then(m => m.DocumentsModule) }
     ]
   }
 ];

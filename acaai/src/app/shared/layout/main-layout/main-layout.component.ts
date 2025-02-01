@@ -30,11 +30,18 @@ export class MainLayoutComponent implements OnInit {
   }
 
   onMenuClick(route: string): void {
+    if (route === 'documentos') {
+      this.router.navigate(['/dashboard/documentos']);
+      this.currentRoute = route;
+      return;
+    }
+    
     if (route !== 'inicio') {
-      // Por ahora solo mostramos un mensaje para las otras opciones
       console.log('Opción en desarrollo:', route);
       return;
     }
+    
+    this.router.navigate(['/dashboard/inicio']);
     this.currentRoute = route;
   }
 

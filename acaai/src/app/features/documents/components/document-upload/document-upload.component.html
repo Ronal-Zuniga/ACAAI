@@ -1,0 +1,121 @@
+<div class="documents-container">
+  <!-- Breadcrumbs y título -->
+  <div class="page-header">
+    <div class="breadcrumbs">
+      <span><i class="bi bi-house-door"></i> Inicio</span>
+      <i class="bi bi-chevron-right"></i>
+      <span>Documentos</span>
+      <i class="bi bi-chevron-right"></i>
+      <span class="current">Carga</span>
+    </div>
+    <h1><i class="bi bi-file-earmark-text"></i> Gestión de Documentos</h1>
+  </div>
+
+  <div class="content-grid">
+    <!-- Área principal -->
+    <div class="main-section">
+      <!-- Zona de drag & drop -->
+      <div class="upload-zone" 
+           [class.dragging]="isDragging"
+           (dragover)="onDragOver($event)"
+           (dragleave)="onDragLeave($event)"
+           (drop)="onFileDropped($event)"
+           (click)="fileInput.click()">
+        <input #fileInput type="file" 
+               multiple 
+               hidden 
+               (change)="onFileSelected($event)">
+        <i class="bi bi-cloud-upload"></i>
+        <p>Arrastra archivos aquí o haz clic para seleccionar</p>
+        <small>Formatos permitidos: PDF, DOC, DOCX, XLS, XLSX (Máx. 10MB)</small>
+      </div>
+
+      <!-- Lista de documentos -->
+      <div class="documents-list">
+        <h2>Documentos Cargados</h2>
+        <div class="list-header">
+          <div class="col-name">Nombre del archivo</div>
+          <div class="col-size">Tamaño</div>
+          <div class="col-date">Fecha de carga</div>
+          <div class="col-status">Estado</div>
+          <div class="col-actions">Acciones</div>
+        </div>
+        <div class="list-body">
+          <div class="document-item" *ngFor="let doc of documents" 
+               [class.selected]="selectedDocument?.id === doc.id"
+               (click)="selectDocument(doc)">
+            <div class="col-name">
+              <i class="bi" [class.bi-file-pdf-fill]="doc.type.includes('pdf')"
+                          [class.bi-file-word-fill]="doc.type.includes('word')"
+                          [class.bi-file-excel-fill]="doc.type.includes('excel')"></i>
+              {{doc.name}}
+            </div>
+            <div class="col-size">{{doc.size}}</div>
+            <div class="col-date">{{doc.uploadDate}}</div>
+            <div class="col-status">
+              <i [class]="getStatusIcon(doc.status)" [title]="getStatusText(doc.status)"></i>
+              {{getStatusText(doc.status)}}
+            </div>
+            <div class="col-actions">
+              <button class="btn-icon" title="Descargar" (click)="downloadDocument(doc); $event.stopPropagation()">
+                <i class="bi bi-download"></i>
+              </button>
+              <button class="btn-icon" title="Ver detalles" (click)="viewDetails(doc); $event.stopPropagation()">
+                <i class="bi bi-eye"></i>
+              </button>
+              <button class="btn-icon delete" title="Eliminar" (click)="deleteDocument(doc.id); $event.stopPropagation()">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de progreso y botón -->
+      <div class="upload-progress">
+        <div class="progress-info">
+          <div class="progress-text">{{uploadedValid}} de {{totalRequired}} documentos requeridos</div>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width]="(uploadedValid/totalRequired * 100) + '%'"></div>
+          </div>
+        </div>
+        <button class="btn-finish" (click)="finishUpload()">
+          <i class="bi bi-check2-circle"></i>
+          Finalizar carga
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel de previsualización -->
+    <div class="preview-panel" [class.has-document]="selectedDocument">
+      <div class="preview-header">
+        <h3>Previsualización</h3>
+        <div class="document-info" *ngIf="selectedDocument">
+          <h4>{{selectedDocument.name}}</h4>
+          <p>
+            <span class="info-label">Tamaño:</span> {{selectedDocument.size}} |
+            <span class="info-label">Fecha:</span> {{selectedDocument.uploadDate}}
+          </p>
+        </div>
+      </div>
+      <div class="preview-content" *ngIf="selectedDocument">
+        <ng-container [ngSwitch]="true">
+          <div *ngSwitchCase="selectedDocument.type.includes('pdf')" class="pdf-preview">
+            <iframe [src]="selectedDocument.url" frameborder="0"></iframe>
+          </div>
+          <div *ngSwitchCase="selectedDocument.type.includes('image')" class="image-preview">
+            <img [src]="selectedDocument.url" alt="Preview">
+          </div>
+          <div *ngSwitchDefault class="no-preview">
+            <i class="bi bi-file-earmark-text"></i>
+            <p>Vista previa no disponible para este tipo de archivo</p>
+          </div>
+        </ng-container>
+      </div>
+      <div class="no-document" *ngIf="!selectedDocument">
+        <i class="bi bi-file-earmark"></i>
+        <p>Selecciona un documento para ver su contenido</p>
+      </div>
+    </div>
+  </div>
+</div> 
