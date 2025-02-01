@@ -1,0 +1,288 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-wrapper">
+          <img src="assets/images/logo-acaai.png" alt="Logo ACAAI" class="header-logo">
+        </div>
+        <h1>Sistema de Gestión ACAAI</h1>
+      </div>
+      <div class="user-section">
+        <div class="notifications">
+          <button class="btn-notification">
+            <i class="bi bi-bell-fill"></i>
+            <span class="notification-badge">5</span>
+          </button>
+        </div>
+        <div class="user-info">
+          <img src="assets/images/profile-placeholder.jpg" alt="Foto de perfil" class="profile-pic">
+          <div class="user-details">
+            <span class="user-name">María González</span>
+            <span class="user-role">Autoridad de Programa</span>
+          </div>
+          <button class="btn-user-menu">
+            <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-content">
+    <nav class="sidebar">
+      <ul class="nav-menu">
+        <li class="nav-item active">
+          <a href="#" class="nav-link">
+            <i class="bi bi-house-door"></i>
+            Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="bi bi-file-text"></i>
+            Solicitudes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="bi bi-folder2-open"></i>
+            Documentos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="bi bi-clipboard-data"></i>
+            Evaluaciones
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="bi bi-gear"></i>
+            Configuración
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <app-main-layout>
+        <div class="dashboard-grid">
+          <!-- Resumen General -->
+          <div class="dashboard-card summary-card">
+            <h3><i class="bi bi-speedometer2"></i> Resumen General</h3>
+            <div class="summary-stats">
+              <div class="stat-item">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Programas en Proceso</div>
+              </div>
+              <div class="stat-item highlight">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Requieren Atención</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Evaluaciones Pendientes</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calendario y Fechas Límite -->
+          <div class="dashboard-card calendar-card">
+            <h3><i class="bi bi-calendar3"></i> Próximas Fechas Límite</h3>
+            <div class="deadline-list">
+              <div class="deadline-item urgent">
+                <div class="date">15/04/2024</div>
+                <div class="event-details">
+                  <div class="event">Entrega de autoestudio - Ingeniería Civil</div>
+                  <div class="institution">Universidad Tecnológica</div>
+                </div>
+                <span class="status urgent">Urgente</span>
+              </div>
+              <div class="deadline-item">
+                <div class="date">30/04/2024</div>
+                <div class="event-details">
+                  <div class="event">Revisión de documentación - Arquitectura</div>
+                  <div class="institution">Universidad Central</div>
+                </div>
+                <span class="status pending">Pendiente</span>
+              </div>
+              <div class="deadline-item">
+                <div class="date">10/05/2024</div>
+                <div class="event-details">
+                  <div class="event">Evaluación preliminar - Ingeniería Industrial</div>
+                  <div class="institution">Universidad del Norte</div>
+                </div>
+                <span class="status upcoming">Próximo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progreso de Programas -->
+          <div class="dashboard-card progress-card">
+            <h3><i class="bi bi-graph-up"></i> Estado de Programas</h3>
+            <div class="progress-circles">
+              <div class="progress-item">
+                <div class="progress-circle" data-progress="70">
+                  <div class="progress-value">70%</div>
+                </div>
+                <span>Ing. Civil</span>
+                <small>Fase: Autoestudio</small>
+              </div>
+              <div class="progress-item">
+                <div class="progress-circle" data-progress="45">
+                  <div class="progress-value">45%</div>
+                </div>
+                <span>Arquitectura</span>
+                <small>Fase: Documentación</small>
+              </div>
+              <div class="progress-item">
+                <div class="progress-circle" data-progress="90">
+                  <div class="progress-value">90%</div>
+                </div>
+                <span>Ing. Industrial</span>
+                <small>Fase: Evaluación Final</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actividad Reciente -->
+          <div class="dashboard-card activity-card">
+            <h3><i class="bi bi-activity"></i> Actividad Reciente</h3>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon">
+                  <i class="bi bi-file-earmark-check"></i>
+                </div>
+                <div class="activity-content">
+                  <div class="activity-header">
+                    <span class="activity-title">Documento Actualizado</span>
+                    <span class="activity-time">Hace 2 horas</span>
+                  </div>
+                  <p>Se ha actualizado el informe de autoestudio de Ingeniería Civil</p>
+                  <div class="activity-meta">
+                    <span class="program">Ing. Civil</span>
+                    <span class="action">Ver Cambios</span>
+                  </div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon">
+                  <i class="bi bi-chat-dots"></i>
+                </div>
+                <div class="activity-content">
+                  <div class="activity-header">
+                    <span class="activity-title">Nuevo Comentario</span>
+                    <span class="activity-time">Hace 3 horas</span>
+                  </div>
+                  <p>El evaluador ha añadido comentarios sobre la documentación de Arquitectura</p>
+                  <div class="activity-meta">
+                    <span class="program">Arquitectura</span>
+                    <span class="action">Responder</span>
+                  </div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon">
+                  <i class="bi bi-check2-circle"></i>
+                </div>
+                <div class="activity-content">
+                  <div class="activity-header">
+                    <span class="activity-title">Evaluación Completada</span>
+                    <span class="activity-time">Hace 5 horas</span>
+                  </div>
+                  <p>Se ha completado la evaluación preliminar de Ingeniería Industrial</p>
+                  <div class="activity-meta">
+                    <span class="program">Ing. Industrial</span>
+                    <span class="action">Ver Reporte</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Acciones Rápidas -->
+          <div class="dashboard-card quick-actions-card">
+            <h3><i class="bi bi-lightning"></i> Acciones Rápidas</h3>
+            <div class="quick-actions-grid">
+              <button class="quick-action">
+                <i class="bi bi-plus-circle"></i>
+                <span>Nueva Evaluación</span>
+              </button>
+              <button class="quick-action">
+                <i class="bi bi-upload"></i>
+                <span>Subir Documento</span>
+              </button>
+              <button class="quick-action">
+                <i class="bi bi-calendar-plus"></i>
+                <span>Agendar Reunión</span>
+              </button>
+              <button class="quick-action">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>Generar Reporte</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Estadísticas -->
+          <div class="dashboard-card stats-card">
+            <h3><i class="bi bi-bar-chart"></i> Estadísticas del Mes</h3>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <div class="stat-icon">
+                  <i class="bi bi-file-check"></i>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-number">24</span>
+                  <span class="stat-label">Documentos Revisados</span>
+                </div>
+                <div class="stat-trend positive">
+                  <i class="bi bi-arrow-up"></i>
+                  <span>12%</span>
+                </div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-icon">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-number">8</span>
+                  <span class="stat-label">Programas Activos</span>
+                </div>
+                <div class="stat-trend positive">
+                  <i class="bi bi-arrow-up"></i>
+                  <span>25%</span>
+                </div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-icon">
+                  <i class="bi bi-clock-history"></i>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-number">45h</span>
+                  <span class="stat-label">Tiempo Promedio</span>
+                </div>
+                <div class="stat-trend negative">
+                  <i class="bi bi-arrow-down"></i>
+                  <span>8%</span>
+                </div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-icon">
+                  <i class="bi bi-star"></i>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-number">4.8</span>
+                  <span class="stat-label">Satisfacción</span>
+                </div>
+                <div class="stat-trend positive">
+                  <i class="bi bi-arrow-up"></i>
+                  <span>5%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-main-layout>
+    </main>
+  </div>
+</div>

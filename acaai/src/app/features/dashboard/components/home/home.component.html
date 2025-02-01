@@ -1,0 +1,209 @@
+<div class="dashboard-grid">
+  <!-- Resumen General -->
+  <div class="dashboard-card">
+    <h3><i class="bi bi-graph-up"></i> Resumen General</h3>
+    <div class="summary-stats">
+      <div class="stat-item">
+        <div class="stat-value">12</div>
+        <div class="stat-label">Programas en Proceso</div>
+      </div>
+      <div class="stat-item highlight">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Requieren Atención</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">8</div>
+        <div class="stat-label">Evaluaciones Pendientes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">10</div>
+        <div class="stat-label">Programas Finalizados</div>
+      </div>
+      <div class="stat-item highlight">
+        <div class="stat-value">6</div>
+        <div class="stat-label">Documentos Pendientes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">10</div>
+        <div class="stat-label">Documentos Revisados</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Próximas Fechas Límite -->
+  <div class="dashboard-card">
+    <h3><i class="bi bi-calendar-event"></i> Próximas Fechas Límite</h3>
+    <div class="deadline-list">
+      <div class="deadline-item urgent">
+        <div class="date">15 Mayo</div>
+        <div class="event-details">
+          <div class="event">Entrega de Documentación</div>
+          <div class="institution">Universidad Nacional</div>
+        </div>
+        <span class="status urgent">Urgente</span>
+      </div>
+      <div class="deadline-item">
+        <div class="date">20 Mayo</div>
+        <div class="event-details">
+          <div class="event">Revisión de Programa</div>
+          <div class="institution">Instituto Tecnológico</div>
+        </div>
+        <span class="status pending">Pendiente</span>
+      </div>
+      <div class="deadline-item">
+        <div class="date">1 Junio</div>
+        <div class="event-details">
+          <div class="event">Evaluación Final</div>
+          <div class="institution">Universidad Autónoma</div>
+        </div>
+        <span class="status upcoming">Próximo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estado de Programas -->
+  <div class="dashboard-card">
+    <h3><i class="bi bi-pie-chart"></i> Estado de Programas</h3>
+    <div class="progress-circles">
+      <div class="progress-item">
+        <div class="progress-circle" style="--progress: 75%">
+          <div class="progress-value">75%</div>
+        </div>
+        <span>Medicina</span>
+        <small>Fase 3 de 4</small>
+      </div>
+      <div class="progress-item">
+        <div class="progress-circle" style="--progress: 45%">
+          <div class="progress-value">45%</div>
+        </div>
+        <span>Enfermería</span>
+        <small>Fase 2 de 4</small>
+      </div>
+      <div class="progress-item">
+        <div class="progress-circle" style="--progress: 90%">
+          <div class="progress-value">90%</div>
+        </div>
+        <span>Pediatría</span>
+        <small>Fase 4 de 4</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actividad Reciente -->
+  <div class="dashboard-card">
+    <h3><i class="bi bi-activity"></i> Actividad Reciente</h3>
+    <div class="activity-list">
+      <div class="activity-item">
+        <div class="activity-icon">
+          <i class="bi bi-file-earmark-text"></i>
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <div class="activity-title">Documentación Actualizada</div>
+            <div class="activity-time">Hace 2h</div>
+          </div>
+          <p>Se han actualizado los documentos del programa de certificación.</p>
+          <div class="activity-meta">
+            <span class="program">Programa: Medicina General</span>
+            <span class="action" (click)="onViewDetails('Medicina General')">Ver Detalles</span>
+          </div>
+        </div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-icon">
+          <i class="bi bi-check-circle"></i>
+        </div>
+        <div class="activity-content">
+          <div class="activity-header">
+            <div class="activity-title">Evaluación Completada</div>
+            <div class="activity-time">Hace 5h</div>
+          </div>
+          <p>Se ha completado la evaluación del programa de especialización.</p>
+          <div class="activity-meta">
+            <span class="program">Programa: Pediatría</span>
+            <span class="action" (click)="onViewReport('Pediatría')">Ver Informe</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones Rápidas -->
+  <div class="dashboard-card">
+    <h3><i class="bi bi-lightning"></i> Acciones Rápidas</h3>
+    <div class="quick-actions-grid">
+      <button class="quick-action" (click)="onNewEvaluation()">
+        <i class="bi bi-plus-circle"></i>
+        <span>Nueva Evaluación</span>
+      </button>
+      <button class="quick-action" (click)="onUploadDocuments()">
+        <i class="bi bi-upload"></i>
+        <span>Subir Documentos</span>
+      </button>
+      <button class="quick-action" (click)="onScheduleMeeting()">
+        <i class="bi bi-calendar-plus"></i>
+        <span>Agendar Reunión</span>
+      </button>
+      <button class="quick-action" (click)="onGenerateReport()">
+        <i class="bi bi-file-earmark-text"></i>
+        <span>Generar Reporte</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Estadísticas del Mes -->
+  <div class="dashboard-card">
+    <h3><i class="bi bi-bar-chart"></i> Estadísticas del Mes</h3>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-icon">
+          <i class="bi bi-file-text"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-number">245</span>
+          <span class="stat-label">Documentos Revisados</span>
+          <span class="stat-trend positive">
+            <i class="bi bi-arrow-up"></i> 12%
+          </span>
+        </div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-icon">
+          <i class="bi bi-building"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-number">18</span>
+          <span class="stat-label">Programas Activos</span>
+          <span class="stat-trend positive">
+            <i class="bi bi-arrow-up"></i> 5%
+          </span>
+        </div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-icon">
+          <i class="bi bi-clock"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-number">4.2</span>
+          <span class="stat-label">Tiempo Promedio (días)</span>
+          <span class="stat-trend negative">
+            <i class="bi bi-arrow-down"></i> 8%
+          </span>
+        </div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-icon">
+          <i class="bi bi-star"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-number">4.8</span>
+          <span class="stat-label">Calificación Satisfacción</span>
+          <span class="stat-trend positive">
+            <i class="bi bi-arrow-up"></i> 3%
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

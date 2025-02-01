@@ -1,0 +1,94 @@
+<div class="layout-container">
+  <!-- Header fijo -->
+  <header class="main-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-wrapper">
+          <img src="assets/images/logo-acaai.png" alt="Logo ACAAI" class="header-logo">
+        </div>
+        <h1>Sistema de Gestión ACAAI</h1>
+      </div>
+      <div class="user-section">
+        <div class="notifications">
+          <button class="btn-notification" (click)="toggleNotifications()">
+            <i class="bi bi-bell-fill"></i>
+            <span class="notification-badge">5</span>
+          </button>
+          <!-- Panel de notificaciones -->
+          <div class="notifications-panel" [class.show]="showNotifications">
+            <h3>Notificaciones</h3>
+            <div class="notifications-list">
+              <div class="notification-item unread">
+                <i class="bi bi-circle-fill"></i>
+                <div class="notification-content">
+                  <p>Nueva evaluación asignada</p>
+                  <span>Hace 1 hora</span>
+                </div>
+              </div>
+              <div class="notification-item unread">
+                <i class="bi bi-circle-fill"></i>
+                <div class="notification-content">
+                  <p>Comentario nuevo en documento</p>
+                  <span>Hace 2 horas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="user-info" (click)="logout()">
+          <div class="user-avatar">
+            <i class="bi bi-person-circle"></i>
+          </div>
+          <div class="user-details">
+            <span class="user-name">María González</span>
+            <span class="user-role">Autoridad de Programa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor principal -->
+  <div class="main-container">
+    <!-- Sidebar fijo -->
+    <nav class="main-sidebar">
+      <ul class="nav-menu">
+        <li class="nav-item" [class.active]="currentRoute === 'inicio'">
+          <a [routerLink]="['inicio']" class="nav-link" (click)="onMenuClick('inicio')">
+            <i class="bi bi-house-door"></i>
+            <span>Inicio</span>
+          </a>
+        </li>
+        <li class="nav-item" [class.active]="currentRoute === 'solicitudes'">
+          <a href="javascript:void(0)" class="nav-link" (click)="onMenuClick('solicitudes')">
+            <i class="bi bi-file-text"></i>
+            <span>Solicitudes</span>
+          </a>
+        </li>
+        <li class="nav-item" [class.active]="currentRoute === 'documentos'">
+          <a href="javascript:void(0)" class="nav-link" (click)="onMenuClick('documentos')">
+            <i class="bi bi-folder2-open"></i>
+            <span>Documentos</span>
+          </a>
+        </li>
+        <li class="nav-item" [class.active]="currentRoute === 'evaluaciones'">
+          <a href="javascript:void(0)" class="nav-link" (click)="onMenuClick('evaluaciones')">
+            <i class="bi bi-clipboard-data"></i>
+            <span>Evaluaciones</span>
+          </a>
+        </li>
+        <li class="nav-item" [class.active]="currentRoute === 'configuracion'">
+          <a href="javascript:void(0)" class="nav-link" (click)="onMenuClick('configuracion')">
+            <i class="bi bi-gear"></i>
+            <span>Configuración</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Contenido dinámico -->
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
