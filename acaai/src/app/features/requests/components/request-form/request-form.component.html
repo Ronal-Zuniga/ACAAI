@@ -6,7 +6,8 @@
           <i class="bi bi-file-earmark-text"></i>
           {{ isEditing ? 'Editar Solicitud' : 'Nueva Solicitud' }}
         </h1>
-        <p class="subtitle">{{ isEditing ? 'Modifique los datos de la solicitud' : 'Complete el formulario para crear una nueva solicitud' }}</p>
+        <p class="subtitle">{{ isEditing ? 'Modifique los datos de la solicitud' : 'Complete el formulario para crear
+          una nueva solicitud' }}</p>
       </div>
     </div>
   </div>
@@ -21,12 +22,10 @@
             Nombre del Programa
             <span class="required">*</span>
           </label>
-          <input 
-            type="text" 
-            id="programName" 
-            formControlName="programName"
+          <input type="text" id="programName" formControlName="programName"
             [class.is-invalid]="requestForm.get('programName')?.invalid && requestForm.get('programName')?.touched">
-          <div class="invalid-feedback" *ngIf="requestForm.get('programName')?.invalid && requestForm.get('programName')?.touched">
+          <div class="invalid-feedback"
+            *ngIf="requestForm.get('programName')?.invalid && requestForm.get('programName')?.touched">
             El nombre del programa es requerido
           </div>
         </div>
@@ -36,12 +35,10 @@
             Institución
             <span class="required">*</span>
           </label>
-          <input 
-            type="text" 
-            id="institution" 
-            formControlName="institution"
+          <input type="text" id="institution" formControlName="institution"
             [class.is-invalid]="requestForm.get('institution')?.invalid && requestForm.get('institution')?.touched">
-          <div class="invalid-feedback" *ngIf="requestForm.get('institution')?.invalid && requestForm.get('institution')?.touched">
+          <div class="invalid-feedback"
+            *ngIf="requestForm.get('institution')?.invalid && requestForm.get('institution')?.touched">
             La institución es requerida
           </div>
         </div>
@@ -51,9 +48,7 @@
             Tipo de Acreditación
             <span class="required">*</span>
           </label>
-          <select 
-            id="type" 
-            formControlName="type"
+          <select id="type" formControlName="type"
             [class.is-invalid]="requestForm.get('type')?.invalid && requestForm.get('type')?.touched">
             <option value="">Seleccione un tipo</option>
             <option value="Acreditación Inicial">Acreditación Inicial</option>
@@ -69,13 +64,10 @@
             Cantidad de Sedes
             <span class="required">*</span>
           </label>
-          <input 
-            type="number" 
-            id="campusCount" 
-            formControlName="campusCount"
-            min="1"
+          <input type="number" id="campusCount" formControlName="campusCount" min="1"
             [class.is-invalid]="requestForm.get('campusCount')?.invalid && requestForm.get('campusCount')?.touched">
-          <div class="invalid-feedback" *ngIf="requestForm.get('campusCount')?.invalid && requestForm.get('campusCount')?.touched">
+          <div class="invalid-feedback"
+            *ngIf="requestForm.get('campusCount')?.invalid && requestForm.get('campusCount')?.touched">
             Debe especificar al menos una sede
           </div>
         </div>
@@ -86,12 +78,10 @@
           Descripción del Programa
           <span class="required">*</span>
         </label>
-        <textarea 
-          id="description" 
-          formControlName="description"
-          rows="4"
+        <textarea id="description" formControlName="description" rows="4"
           [class.is-invalid]="requestForm.get('description')?.invalid && requestForm.get('description')?.touched"></textarea>
-        <div class="invalid-feedback" *ngIf="requestForm.get('description')?.invalid && requestForm.get('description')?.touched">
+        <div class="invalid-feedback"
+          *ngIf="requestForm.get('description')?.invalid && requestForm.get('description')?.touched">
           La descripción es requerida
         </div>
       </div>
@@ -104,11 +94,7 @@
         <div class="document-upload">
           <h3>Convenio de Constitución</h3>
           <div class="upload-zone" (click)="constitutionInput.click()">
-            <input 
-              #constitutionInput
-              type="file" 
-              hidden 
-              (change)="onFileSelected($event, 'constitution')"
+            <input #constitutionInput type="file" hidden (change)="onFileSelected($event, 'constitution')"
               accept=".pdf,.doc,.docx">
             <i class="bi bi-cloud-upload"></i>
             <div class="upload-text">
@@ -121,11 +107,7 @@
         <div class="document-upload">
           <h3>Declaración Jurada</h3>
           <div class="upload-zone" (click)="declarationInput.click()">
-            <input 
-              #declarationInput
-              type="file" 
-              hidden 
-              (change)="onFileSelected($event, 'declaration')"
+            <input #declarationInput type="file" hidden (change)="onFileSelected($event, 'declaration')"
               accept=".pdf,.doc,.docx">
             <i class="bi bi-cloud-upload"></i>
             <div class="upload-text">
@@ -138,11 +120,7 @@
         <div class="document-upload">
           <h3>Contrato de Servicios</h3>
           <div class="upload-zone" (click)="contractInput.click()">
-            <input 
-              #contractInput
-              type="file" 
-              hidden 
-              (change)="onFileSelected($event, 'contract')"
+            <input #contractInput type="file" hidden (change)="onFileSelected($event, 'contract')"
               accept=".pdf,.doc,.docx">
             <i class="bi bi-cloud-upload"></i>
             <div class="upload-text">
@@ -155,11 +133,7 @@
         <div class="document-upload">
           <h3>Comprobante de Pago</h3>
           <div class="upload-zone" (click)="paymentInput.click()">
-            <input 
-              #paymentInput
-              type="file" 
-              hidden 
-              (change)="onFileSelected($event, 'payment')"
+            <input #paymentInput type="file" hidden (change)="onFileSelected($event, 'payment')"
               accept=".pdf,.jpg,.png">
             <i class="bi bi-cloud-upload"></i>
             <div class="upload-text">
@@ -178,9 +152,10 @@
         Cancelar
       </button>
       <button type="submit" class="btn-submit" [disabled]="requestForm.invalid || savingChanges">
-        <i class="bi" [class.bi-save]="!savingChanges" [class.bi-arrow-repeat]="savingChanges" [class.spin]="savingChanges"></i>
+        <i class="bi" [class.bi-save]="!savingChanges" [class.bi-arrow-repeat]="savingChanges"
+          [class.spin]="savingChanges"></i>
         {{ savingChanges ? 'Guardando...' : (isEditing ? 'Guardar Cambios' : 'Crear Solicitud') }}
       </button>
     </div>
   </form>
-</div> 
+</div>

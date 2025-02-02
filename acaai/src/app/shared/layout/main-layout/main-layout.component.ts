@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-main-layout',
   standalone: false,
-  
+
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.css'
 })
@@ -36,12 +36,12 @@ export class MainLayoutComponent implements OnInit {
       this.currentRoute = route;
       return;
     }
-    
+
     if (route !== 'inicio') {
       console.log('Opción en desarrollo:', route);
       return;
     }
-    
+
     this.router.navigate(['/dashboard/inicio']);
     this.currentRoute = route;
   }

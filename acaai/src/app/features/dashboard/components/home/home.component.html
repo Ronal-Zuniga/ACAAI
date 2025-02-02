@@ -64,28 +64,30 @@
 
   <!-- Estado de Programas -->
   <div class="dashboard-card">
-    <h3><i class="bi bi-pie-chart"></i> Estado de Programas</h3>
+    <h3><i class="bi bi-graph-up"></i> Estado de Programas</h3>
     <div class="progress-circles">
       <div class="progress-item">
-        <div class="progress-circle" style="--progress: 75%">
-          <div class="progress-value">75%</div>
+        <div class="progress-circle" style="--progress: 70%">
+          <div class="progress-value">70%</div>
         </div>
-        <span>Medicina</span>
-        <small>Fase 3 de 4</small>
+        <span>Ing. Civil</span>
+        <small>Fase: Autoestudio</small>
       </div>
       <div class="progress-item">
         <div class="progress-circle" style="--progress: 45%">
           <div class="progress-value">45%</div>
         </div>
-        <span>Enfermería</span>
-        <small>Fase 2 de 4</small>
+        <span>Arquitectura</span>
+        <small>Fase: Documentación</small>
+
       </div>
       <div class="progress-item">
         <div class="progress-circle" style="--progress: 90%">
           <div class="progress-value">90%</div>
         </div>
-        <span>Pediatría</span>
-        <small>Fase 4 de 4</small>
+
+        <span>Ing. Industrial</span>
+        <small>Fase: Evaluación Final</small>
       </div>
     </div>
   </div>
@@ -105,10 +107,11 @@
           </div>
           <p>Se han actualizado los documentos del programa de certificación.</p>
           <div class="activity-meta">
-            <span class="program">Programa: Medicina General</span>
-            <span class="action" (click)="onViewDetails('Medicina General')">Ver Detalles</span>
+            <span class="program">Programa: Ingeniería Civil</span>
+            <span class="action" (click)="onViewDetails('Ingeniería Civil')">Ver Detalles</span>
           </div>
         </div>
+
       </div>
       <div class="activity-item">
         <div class="activity-icon">
@@ -121,10 +124,11 @@
           </div>
           <p>Se ha completado la evaluación del programa de especialización.</p>
           <div class="activity-meta">
-            <span class="program">Programa: Pediatría</span>
-            <span class="action" (click)="onViewReport('Pediatría')">Ver Informe</span>
+            <span class="program">Programa: Arquitectura</span>
+            <span class="action" (click)="onViewReport('Arquitectura')">Ver Informe</span>
           </div>
         </div>
+
       </div>
     </div>
   </div>

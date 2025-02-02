@@ -65,10 +65,9 @@
           <div class="rating-section">
             <label>Calificación</label>
             <div class="rating-options">
-              <div *ngFor="let option of ratingScale" 
-                   class="rating-option" 
-                   [class.active]="evaluationForm.get('rating_' + criterion.id)?.value === option.value"
-                   (click)="setRating(criterion.id, option.value)">
+              <div *ngFor="let option of ratingScale" class="rating-option"
+                [class.active]="evaluationForm.get('rating_' + criterion.id)?.value === option.value"
+                (click)="setRating(criterion.id, option.value)">
                 <div class="rating-label">{{ option.label }}</div>
                 <div class="rating-description">{{ option.description }}</div>
               </div>
@@ -91,9 +90,7 @@
           <!-- Campo de comentarios -->
           <div class="comments-section">
             <label>Comentarios y observaciones</label>
-            <textarea 
-              rows="4" 
-              [formControlName]="'comments_' + criterion.id"
+            <textarea rows="4" [formControlName]="'comments_' + criterion.id"
               placeholder="Ingrese sus comentarios sobre este criterio..."></textarea>
             <div class="error-message" *ngIf="evaluationForm.get('comments_' + criterion.id)?.errors?.['required'] && 
                                             evaluationForm.get('comments_' + criterion.id)?.touched">
@@ -107,7 +104,8 @@
       <!-- Barra de acciones -->
       <div class="action-bar">
         <button class="btn-draft" (click)="saveDraft()" [disabled]="savingDraft">
-          <i class="bi" [class.bi-save]="!savingDraft" [class.bi-arrow-repeat]="savingDraft" [class.spin]="savingDraft"></i>
+          <i class="bi" [class.bi-save]="!savingDraft" [class.bi-arrow-repeat]="savingDraft"
+            [class.spin]="savingDraft"></i>
           {{ savingDraft ? 'Guardando...' : 'Guardar borrador' }}
         </button>
         <button class="btn-preview" (click)="previewReport()">
@@ -121,4 +119,4 @@
       </div>
     </div>
   </div>
-</div> 
+</div>

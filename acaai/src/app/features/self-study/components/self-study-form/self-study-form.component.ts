@@ -83,8 +83,10 @@ export class SelfStudyFormComponent implements OnInit, OnDestroy {
           fields: [
             { id: 'institutionName', type: 'text', label: 'Nombre de la Institución', required: true },
             { id: 'programName', type: 'text', label: 'Nombre del Programa', required: true },
-            { id: 'accreditationLevel', type: 'multiselect', label: 'Nivel de Acreditación', required: true,
-              options: ['Nacional', 'Internacional', 'Regional'] }
+            {
+              id: 'accreditationLevel', type: 'multiselect', label: 'Nivel de Acreditación', required: true,
+              options: ['Nacional', 'Internacional', 'Regional']
+            }
           ]
         }
       ]
@@ -100,8 +102,10 @@ export class SelfStudyFormComponent implements OnInit, OnDestroy {
           completed: true,
           fields: [
             { id: 'facilities', type: 'textarea', label: 'Descripción de Instalaciones', required: true },
-            { id: 'equipment', type: 'multiselect', label: 'Equipamiento Disponible', required: true, 
-              options: ['Laboratorios', 'Biblioteca', 'Salas de Cómputo', 'Auditorios'] },
+            {
+              id: 'equipment', type: 'multiselect', label: 'Equipamiento Disponible', required: true,
+              options: ['Laboratorios', 'Biblioteca', 'Salas de Cómputo', 'Auditorios']
+            },
             { id: 'photos', type: 'file', label: 'Evidencia Fotográfica', required: true }
           ]
         }
@@ -118,8 +122,10 @@ export class SelfStudyFormComponent implements OnInit, OnDestroy {
           completed: false,
           fields: [
             { id: 'admissionProcess', type: 'textarea', label: 'Proceso de Admisión', required: true },
-            { id: 'evaluationMethods', type: 'multiselect', label: 'Métodos de Evaluación', required: true,
-              options: ['Exámenes', 'Proyectos', 'Prácticas', 'Investigación'] }
+            {
+              id: 'evaluationMethods', type: 'multiselect', label: 'Métodos de Evaluación', required: true,
+              options: ['Exámenes', 'Proyectos', 'Prácticas', 'Investigación']
+            }
           ]
         }
       ]
@@ -185,7 +191,7 @@ export class SelfStudyFormComponent implements OnInit, OnDestroy {
         subsection.fields.forEach(field => {
           const validators = field.required ? [Validators.required] : [];
           const initialValue = this.mockData[field.id as keyof typeof this.mockData] || '';
-          
+
           if (field.type === 'multiselect') {
             this.form.addControl(field.id, this.fb.control(initialValue || [], validators));
           } else {
@@ -213,14 +219,14 @@ export class SelfStudyFormComponent implements OnInit, OnDestroy {
         const allFieldsValid = subsection.fields.every(field => {
           const control = this.form.get(field.id);
           if (!control) return false;
-          
+
           const value = control.value;
           if (Array.isArray(value)) {
             return value.length > 0;
           }
           return value && value.trim() !== '';
         });
-        
+
         subsection.completed = allFieldsValid;
       });
     });
@@ -267,7 +273,7 @@ export class SelfStudyFormComponent implements OnInit, OnDestroy {
       console.log('Guardando progreso...', this.form.value);
       this.lastSaved = new Date();
       this.formTouched = false;
-      
+
       // Mostrar notificación de éxito
       this.showNotification('Progreso guardado correctamente');
     } catch (error) {
@@ -376,7 +382,7 @@ export class SelfStudyFormComponent implements OnInit, OnDestroy {
     if (!control) return;
 
     const currentValue = control.value || [];
-    
+
     if (checkbox.checked) {
       if (!currentValue.includes(option)) {
         control.setValue([...currentValue, option]);
@@ -384,7 +390,7 @@ export class SelfStudyFormComponent implements OnInit, OnDestroy {
     } else {
       control.setValue(currentValue.filter((item: string) => item !== option));
     }
-    
+
     this.formTouched = true;
     this.calculateProgress();
   }

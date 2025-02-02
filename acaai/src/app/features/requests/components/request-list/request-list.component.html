@@ -17,34 +17,20 @@
   <div class="filters-section">
     <div class="search-box">
       <i class="bi bi-search"></i>
-      <input 
-        type="text" 
-        placeholder="Buscar por programa o institución..."
-        (input)="onSearch($event)"
+      <input type="text" placeholder="Buscar por programa o institución..." (input)="onSearch($event)"
         [value]="searchTerm">
     </div>
     <div class="status-filters">
-      <button 
-        class="filter-btn" 
-        [class.active]="statusFilter === 'all'"
-        (click)="onStatusFilterChange('all')">
+      <button class="filter-btn" [class.active]="statusFilter === 'all'" (click)="onStatusFilterChange('all')">
         Todas
       </button>
-      <button 
-        class="filter-btn" 
-        [class.active]="statusFilter === 'pending'"
-        (click)="onStatusFilterChange('pending')">
+      <button class="filter-btn" [class.active]="statusFilter === 'pending'" (click)="onStatusFilterChange('pending')">
         Pendientes
       </button>
-      <button 
-        class="filter-btn" 
-        [class.active]="statusFilter === 'review'"
-        (click)="onStatusFilterChange('review')">
+      <button class="filter-btn" [class.active]="statusFilter === 'review'" (click)="onStatusFilterChange('review')">
         En Revisión
       </button>
-      <button 
-        class="filter-btn" 
-        [class.active]="statusFilter === 'approved'"
+      <button class="filter-btn" [class.active]="statusFilter === 'approved'"
         (click)="onStatusFilterChange('approved')">
         Aprobadas
       </button>
@@ -135,4 +121,4 @@
     <i class="bi bi-search"></i>
     <p>No se encontraron solicitudes que coincidan con los criterios de búsqueda</p>
   </div>
-</div> 
+</div>

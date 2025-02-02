@@ -15,16 +15,9 @@
     <!-- Área principal -->
     <div class="main-section">
       <!-- Zona de drag & drop -->
-      <div class="upload-zone" 
-           [class.dragging]="isDragging"
-           (dragover)="onDragOver($event)"
-           (dragleave)="onDragLeave($event)"
-           (drop)="onFileDropped($event)"
-           (click)="fileInput.click()">
-        <input #fileInput type="file" 
-               multiple 
-               hidden 
-               (change)="onFileSelected($event)">
+      <div class="upload-zone" [class.dragging]="isDragging" (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)" (drop)="onFileDropped($event)" (click)="fileInput.click()">
+        <input #fileInput type="file" multiple hidden (change)="onFileSelected($event)">
         <i class="bi bi-cloud-upload"></i>
         <p>Arrastra archivos aquí o haz clic para seleccionar</p>
         <small>Formatos permitidos: PDF, DOC, DOCX, XLS, XLSX (Máx. 10MB)</small>
@@ -41,13 +34,12 @@
           <div class="col-actions">Acciones</div>
         </div>
         <div class="list-body">
-          <div class="document-item" *ngFor="let doc of documents" 
-               [class.selected]="selectedDocument?.id === doc.id"
-               (click)="selectDocument(doc)">
+          <div class="document-item" *ngFor="let doc of documents" [class.selected]="selectedDocument?.id === doc.id"
+            (click)="selectDocument(doc)">
             <div class="col-name">
               <i class="bi" [class.bi-file-pdf-fill]="doc.type.includes('pdf')"
-                          [class.bi-file-word-fill]="doc.type.includes('word')"
-                          [class.bi-file-excel-fill]="doc.type.includes('excel')"></i>
+                [class.bi-file-word-fill]="doc.type.includes('word')"
+                [class.bi-file-excel-fill]="doc.type.includes('excel')"></i>
               {{doc.name}}
             </div>
             <div class="col-size">{{doc.size}}</div>
@@ -63,7 +55,8 @@
               <button class="btn-icon" title="Ver detalles" (click)="viewDetails(doc); $event.stopPropagation()">
                 <i class="bi bi-eye"></i>
               </button>
-              <button class="btn-icon delete" title="Eliminar" (click)="deleteDocument(doc.id); $event.stopPropagation()">
+              <button class="btn-icon delete" title="Eliminar"
+                (click)="deleteDocument(doc.id); $event.stopPropagation()">
                 <i class="bi bi-trash"></i>
               </button>
             </div>
@@ -118,4 +111,4 @@
       </div>
     </div>
   </div>
-</div> 
+</div>

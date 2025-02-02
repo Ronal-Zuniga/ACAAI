@@ -108,7 +108,8 @@
   transition: all 0.3s ease;
 }
 
-.btn-tool:hover, .btn-tool.active {
+.btn-tool:hover,
+.btn-tool.active {
   background: rgba(230, 188, 16, 0.1);
   color: var(--secondary-color);
 }
@@ -329,6 +330,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -475,6 +477,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -499,4 +502,4 @@
     padding: 1rem;
     font-size: 0.9rem;
   }
-} 
+}

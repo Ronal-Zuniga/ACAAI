@@ -27,7 +27,7 @@ export class NotificationListComponent implements OnInit {
   filteredNotifications: Notification[] = [];
   currentFilter: 'all' | 'unread' | 'important' | 'archived' = 'all';
   searchTerm: string = '';
-  
+
   stats = {
     total: 156,
     unread: 23,
@@ -39,7 +39,7 @@ export class NotificationListComponent implements OnInit {
     this.filteredNotifications = [...this.notifications];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   private getMockNotifications(): Notification[] {
     return [

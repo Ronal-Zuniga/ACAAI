@@ -5,7 +5,7 @@
         <img src="assets/images/logo-acaai.png" alt="Logo ACAAI" class="logo">
       </div>
     </div>
-    
+
     <div class="welcome-section">
       <h2 class="welcome-text">¡Bienvenido!</h2>
       <p class="welcome-subtitle">Sistema de Gestión de Acreditación ACAAI</p>
@@ -17,11 +17,7 @@
           <i class="bi bi-person"></i>
           Usuario
         </label>
-        <input 
-          type="text" 
-          class="form-control" 
-          id="username" 
-          formControlName="username"
+        <input type="text" class="form-control" id="username" formControlName="username"
           [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
           placeholder="Ingresa tu nombre de usuario">
         <div class="invalid-feedback" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
@@ -35,29 +31,21 @@
           Contraseña
         </label>
         <div class="password-input">
-          <input 
-            [type]="showPassword ? 'text' : 'password'" 
-            class="form-control" 
-            id="password" 
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password"
             formControlName="password"
             [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
             placeholder="Ingresa tu contraseña">
-          <button 
-            type="button"
-            class="password-toggle"
-            (click)="togglePasswordVisibility()">
+          <button type="button" class="password-toggle" (click)="togglePasswordVisibility()">
             <i class="bi" [class.bi-eye-fill]="!showPassword" [class.bi-eye-slash-fill]="showPassword"></i>
           </button>
-          <div class="invalid-feedback" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <div class="invalid-feedback"
+            *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
             La contraseña es requerida
           </div>
         </div>
       </div>
 
-      <button 
-        type="submit" 
-        class="btn btn-primary login-button" 
-        [disabled]="loginForm.invalid || loading">
+      <button type="submit" class="btn btn-primary login-button" [disabled]="loginForm.invalid || loading">
         <span class="spinner-border spinner-border-sm me-2" *ngIf="loading"></span>
         {{ loading ? 'Iniciando sesión...' : 'Iniciar Sesión' }}
       </button>

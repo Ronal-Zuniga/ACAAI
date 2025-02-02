@@ -128,7 +128,8 @@
                         <span class="required-mark" *ngIf="field.required">*</span>
                       </label>
                       <div class="file-upload" (click)="fileInput.click()">
-                        <input type="file" [id]="field.id" (change)="onFileSelected($event, field.id)" hidden #fileInput>
+                        <input type="file" [id]="field.id" (change)="onFileSelected($event, field.id)" hidden
+                          #fileInput>
                         <div class="file-upload-content">
                           <i class="bi bi-cloud-upload"></i>
                           <div class="file-upload-text">Haz clic aquí para subir tu evidencia fotográfica</div>

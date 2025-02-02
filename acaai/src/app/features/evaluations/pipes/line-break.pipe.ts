@@ -6,11 +6,11 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   standalone: false
 })
 export class LineBreakPipe implements PipeTransform {
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) { }
 
   transform(value: string): SafeHtml {
     if (!value) return '';
-    
+
     // Reemplazar saltos de línea con elementos <p>
     const withParagraphs = value.split('\n\n')
       .filter(paragraph => paragraph.trim() !== '')
