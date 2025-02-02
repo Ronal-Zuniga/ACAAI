@@ -1,0 +1,138 @@
+<div class="requests-container">
+  <!-- Encabezado -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1><i class="bi bi-file-earmark-text"></i> Solicitudes de Acreditación</h1>
+        <p class="subtitle">Gestione las solicitudes de acreditación y reacreditación de programas</p>
+      </div>
+      <button class="btn-create" (click)="createNewRequest()">
+        <i class="bi bi-plus-lg"></i>
+        Nueva Solicitud
+      </button>
+    </div>
+  </div>
+
+  <!-- Filtros y búsqueda -->
+  <div class="filters-section">
+    <div class="search-box">
+      <i class="bi bi-search"></i>
+      <input 
+        type="text" 
+        placeholder="Buscar por programa o institución..."
+        (input)="onSearch($event)"
+        [value]="searchTerm">
+    </div>
+    <div class="status-filters">
+      <button 
+        class="filter-btn" 
+        [class.active]="statusFilter === 'all'"
+        (click)="onStatusFilterChange('all')">
+        Todas
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="statusFilter === 'pending'"
+        (click)="onStatusFilterChange('pending')">
+        Pendientes
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="statusFilter === 'review'"
+        (click)="onStatusFilterChange('review')">
+        En Revisión
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="statusFilter === 'approved'"
+        (click)="onStatusFilterChange('approved')">
+        Aprobadas
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista de solicitudes -->
+  <div class="requests-grid">
+    <div class="request-card" *ngFor="let request of filteredRequests">
+      <div class="card-header">
+        <div class="program-info">
+          <h3>{{ request.programName }}</h3>
+          <span class="institution">
+            <i class="bi bi-building"></i>
+            {{ request.institution }}
+          </span>
+        </div>
+        <span class="status-badge" [class]="getStatusClass(request.status)">
+          {{ getStatusText(request.status) }}
+        </span>
+      </div>
+
+      <div class="card-content">
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Tipo</label>
+            <span>{{ request.type }}</span>
+          </div>
+          <div class="info-item">
+            <label>Fecha de Solicitud</label>
+            <span>{{ request.submissionDate | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="info-item">
+            <label>Última Actualización</label>
+            <span>{{ request.lastUpdate | date:'dd/MM/yyyy' }}</span>
+          </div>
+        </div>
+
+        <div class="documents-section">
+          <h4>Documentos Requeridos</h4>
+          <div class="documents-grid">
+            <div class="document-item">
+              <i class="bi" [class]="getDocumentStatus(request.documents.constitution)"></i>
+              <span>Convenio de Constitución</span>
+            </div>
+            <div class="document-item">
+              <i class="bi" [class]="getDocumentStatus(request.documents.declaration)"></i>
+              <span>Declaración Jurada</span>
+            </div>
+            <div class="document-item">
+              <i class="bi" [class]="getDocumentStatus(request.documents.contract)"></i>
+              <span>Contrato de Servicios</span>
+            </div>
+            <div class="document-item">
+              <i class="bi" [class]="getDocumentStatus(request.documents.payment)"></i>
+              <span>Comprobante de Pago</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-info">
+            <span class="progress-label">Progreso General</span>
+            <span class="progress-value">{{ request.progress }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="request.progress"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-action view" (click)="viewDetails(request.id)" title="Ver detalles">
+          <i class="bi bi-eye"></i>
+        </button>
+        <button class="btn-action edit" (click)="editRequest(request.id)" title="Editar">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button class="btn-action delete" (click)="deleteRequest(request.id)" title="Eliminar">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje cuando no hay resultados -->
+  <div class="no-results" *ngIf="filteredRequests.length === 0">
+    <i class="bi bi-search"></i>
+    <p>No se encontraron solicitudes que coincidan con los criterios de búsqueda</p>
+  </div>
+</div> 

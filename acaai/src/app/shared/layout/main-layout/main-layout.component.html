@@ -66,7 +66,7 @@
           </a>
         </li>
         <li class="nav-item" [class.active]="currentRoute === 'solicitudes'">
-          <a href="javascript:void(0)" class="nav-link" (click)="onMenuClick('solicitudes')">
+          <a [routerLink]="['/dashboard/solicitudes']" class="nav-link" (click)="onMenuClick('solicitudes')">
             <i class="bi bi-file-text"></i>
             <span>Solicitudes</span>
           </a>
