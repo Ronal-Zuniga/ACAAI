@@ -1,0 +1,177 @@
+<div class="self-study-container">
+  <!-- Estado de carga -->
+  <div class="loading-overlay" *ngIf="isLoading">
+    <div class="loading-spinner">
+      <i class="bi bi-arrow-repeat spin"></i>
+      <span>Cargando formulario...</span>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div [class.content-blur]="isLoading">
+    <!-- Barra superior -->
+    <div class="top-bar">
+      <div class="progress-section">
+        <div class="progress-text">
+          <i class="bi bi-check2-circle"></i>
+          Progreso General del Autoestudio
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width.%]="sections[currentSection - 1]?.progress || 0"></div>
+        </div>
+      </div>
+      <div class="autosave-info" [class.saving]="savingInProgress">
+        <i class="bi" [class.bi-clock-history]="!savingInProgress" [class.bi-arrow-repeat]="savingInProgress"
+          [class.spin]="savingInProgress"></i>
+        <span>{{ savingInProgress ? 'Guardando cambios...' : 'Último guardado: ' + getTimeSinceLastSave() }}</span>
+      </div>
+    </div>
+
+    <!-- Grid de contenido principal -->
+    <div class="content-grid">
+      <!-- Barra lateral de secciones -->
+      <aside class="sections-sidebar">
+        <div *ngFor="let section of sections" class="section-item" [class]="getSectionClass(section)"
+          (click)="onSectionChange(section.id)">
+          <div class="section-header">
+            <span class="section-title">{{ section.title }}</span>
+            <div class="section-progress">
+              <div class="progress-circle" [style.--progress]="section.progress + '%'">
+                <span class="progress-text">{{ section.progress }}%</span>
+              </div>
+            </div>
+          </div>
+          <div class="subsections" *ngIf="section.id === currentSection">
+            <div *ngFor="let subsection of section.subsections" class="subsection-item"
+              [class.completed]="subsection.completed">
+              <i class="bi" [class.bi-check-circle-fill]="subsection.completed"
+                [class.bi-circle]="!subsection.completed"></i>
+              {{ subsection.title }}
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Área del formulario -->
+      <main class="form-area">
+        <form [formGroup]="form">
+          <ng-container *ngFor="let section of sections">
+            <div *ngIf="section.id === currentSection">
+              <h2>
+                <i class="bi bi-bookmark-star-fill"></i>
+                {{ section.title }}
+              </h2>
+              <div *ngFor="let subsection of section.subsections" class="subsection-content">
+                <h3>
+                  <i class="bi" [class.bi-check-circle-fill]="subsection.completed"
+                    [class.bi-circle]="!subsection.completed"></i>
+                  {{ subsection.title }}
+                </h3>
+                <div class="fields-grid">
+                  <ng-container *ngFor="let field of subsection.fields">
+                    <!-- Campo de texto -->
+                    <div *ngIf="field.type === 'text'" class="form-field">
+                      <label [for]="field.id">
+                        <i class="bi bi-input-cursor-text"></i>
+                        {{ field.label }}
+                        <span class="required-mark" *ngIf="field.required">*</span>
+                      </label>
+                      <input type="text" [id]="field.id" [formControlName]="field.id" [class.required]="field.required"
+                        [class.ng-invalid]="form.get(field.id)?.invalid && form.get(field.id)?.touched">
+                      <div class="error-message" *ngIf="form.get(field.id)?.invalid && form.get(field.id)?.touched">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Este campo es requerido
+                      </div>
+                    </div>
+
+                    <!-- Área de texto -->
+                    <div *ngIf="field.type === 'textarea'" class="form-field">
+                      <label [for]="field.id">
+                        <i class="bi bi-text-paragraph"></i>
+                        {{ field.label }}
+                        <span class="required-mark" *ngIf="field.required">*</span>
+                      </label>
+                      <textarea [id]="field.id" [formControlName]="field.id" [class.required]="field.required"
+                        [class.ng-invalid]="form.get(field.id)?.invalid && form.get(field.id)?.touched"
+                        rows="4"></textarea>
+                      <div class="error-message" *ngIf="form.get(field.id)?.invalid && form.get(field.id)?.touched">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Este campo es requerido
+                      </div>
+                    </div>
+
+                    <!-- Selección múltiple -->
+                    <div *ngIf="field.type === 'multiselect'" class="form-field">
+                      <label>
+                        <i class="bi bi-check2-square"></i>
+                        {{ field.label }}
+                        <span class="required-mark" *ngIf="field.required">*</span>
+                      </label>
+                      <div class="checkbox-group">
+                        <div *ngFor="let option of field.options" class="checkbox-item">
+                          <input type="checkbox" [id]="option" [checked]="form.get(field.id)?.value?.includes(option)"
+                            (change)="onCheckboxChange($event, field.id, option)">
+                          <label [for]="option">{{ option }}</label>
+                        </div>
+                      </div>
+                      <div class="error-message" *ngIf="form.get(field.id)?.invalid && form.get(field.id)?.touched">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Debe seleccionar al menos una opción
+                      </div>
+                    </div>
+
+                    <!-- Campo de archivo -->
+                    <div *ngIf="field.type === 'file'" class="form-field">
+                      <label [for]="field.id">
+                        <i class="bi bi-file-earmark-image"></i>
+                        {{ field.label }}
+                        <span class="required-mark" *ngIf="field.required">*</span>
+                      </label>
+                      <div class="file-upload" (click)="fileInput.click()">
+                        <input type="file" [id]="field.id" (change)="onFileSelected($event, field.id)" hidden #fileInput>
+                        <div class="file-upload-content">
+                          <i class="bi bi-cloud-upload"></i>
+                          <div class="file-upload-text">Haz clic aquí para subir tu evidencia fotográfica</div>
+                          <div class="file-upload-hint">Formatos permitidos: JPG, PNG, PDF (Máx. 10MB)</div>
+                        </div>
+                        <div class="file-name" *ngIf="form.get(field.id)?.value">
+                          <i class="bi bi-image"></i>
+                          {{ form.get(field.id)?.value }}
+                        </div>
+                      </div>
+                      <div class="error-message" *ngIf="form.get(field.id)?.invalid && form.get(field.id)?.touched">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Debe seleccionar un archivo
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </form>
+
+        <!-- Barra de navegación -->
+        <div class="navigation-bar">
+          <button class="btn-nav" (click)="navigateToPrevious()" [disabled]="currentSection === 1">
+            <i class="bi bi-arrow-left"></i>
+            Anterior
+          </button>
+          <button class="btn-save" (click)="saveAndExit()">
+            <i class="bi bi-box-arrow-left"></i>
+            Guardar y salir
+          </button>
+          <button class="btn-nav" (click)="navigateToNext()" [disabled]="currentSection === sections.length">
+            Siguiente
+            <i class="bi bi-arrow-right"></i>
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Botón de toggle para sidebar en móvil -->
+  <button *ngIf="isSmallScreen" class="btn-toggle-sidebar" (click)="toggleSidebar()">
+    <i class="bi" [class.bi-list]="!isSidebarVisible" [class.bi-x-lg]="isSidebarVisible"></i>
+  </button>
+</div>

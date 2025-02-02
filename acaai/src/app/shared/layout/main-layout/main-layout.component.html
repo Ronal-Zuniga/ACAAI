@@ -59,6 +59,12 @@
             <span>Inicio</span>
           </a>
         </li>
+        <li class="nav-item" [class.active]="currentRoute === 'autoestudio'">
+          <a href="javascript:void(0)" class="nav-link" (click)="onMenuClick('autoestudio')">
+            <i class="bi bi-journal-text"></i>
+            <span>Autoestudio</span>
+          </a>
+        </li>
         <li class="nav-item" [class.active]="currentRoute === 'solicitudes'">
           <a href="javascript:void(0)" class="nav-link" (click)="onMenuClick('solicitudes')">
             <i class="bi bi-file-text"></i>

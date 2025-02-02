@@ -11,7 +11,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
       { path: 'inicio', loadChildren: () => import('./features/dashboard/dashboard/dashboard.module').then(m => m.DashboardModule) },
-      { path: 'documentos', loadChildren: () => import('./features/documents/documents.module').then(m => m.DocumentsModule) }
+      { path: 'documentos', loadChildren: () => import('./features/documents/documents.module').then(m => m.DocumentsModule) },
+      { path: 'autoestudio', loadChildren: () => import('./features/self-study/self-study.module').then(m => m.SelfStudyModule) }
     ]
   }
 ];

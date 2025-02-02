@@ -30,8 +30,8 @@ export class MainLayoutComponent implements OnInit {
   }
 
   onMenuClick(route: string): void {
-    if (route === 'documentos') {
-      this.router.navigate(['/dashboard/documentos']);
+    if (route === 'documentos' || route === 'autoestudio') {
+      this.router.navigate(['/dashboard/' + route]);
       this.currentRoute = route;
       return;
     }
