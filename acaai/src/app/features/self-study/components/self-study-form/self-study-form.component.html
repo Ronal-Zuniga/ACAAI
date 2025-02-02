@@ -17,7 +17,7 @@
           Progreso General del Autoestudio
         </div>
         <div class="progress-bar">
-          <div class="progress-fill" [style.width.%]="sections[currentSection - 1]?.progress || 0"></div>
+          <div class="progress-fill" [style.width.%]="sections[currentSection - 1].progress || 0"></div>
         </div>
       </div>
       <div class="autosave-info" [class.saving]="savingInProgress">

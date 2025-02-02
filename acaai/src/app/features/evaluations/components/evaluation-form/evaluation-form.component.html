@@ -1,0 +1,124 @@
+<div class="evaluation-container">
+  <!-- Encabezado -->
+  <header class="evaluation-header">
+    <div class="program-info">
+      <h1>Evaluación del Programa</h1>
+      <div class="program-details">
+        <span>
+          <i class="bi bi-building"></i>
+          Universidad Nacional
+        </span>
+        <span>
+          <i class="bi bi-book"></i>
+          Ingeniería de Software
+        </span>
+        <span>
+          <i class="bi bi-calendar3"></i>
+          2024-1
+        </span>
+      </div>
+    </div>
+    <div class="evaluation-progress">
+      <div class="progress-text">
+        <i class="bi bi-check-circle-fill"></i>
+        Progreso de evaluación: {{ evaluationProgress | number:'1.0-0' }}%
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="evaluationProgress"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="evaluation-content">
+    <!-- Panel izquierdo - Visor de documento -->
+    <div class="document-panel">
+      <div class="document-toolbar">
+        <button class="btn-tool" [class.active]="currentTool === 'highlight'" (click)="setTool('highlight')">
+          <i class="bi bi-highlighter"></i>
+          Resaltar
+        </button>
+        <button class="btn-tool" [class.active]="currentTool === 'comment'" (click)="setTool('comment')">
+          <i class="bi bi-chat-square-text"></i>
+          Comentar
+        </button>
+        <button class="btn-tool" [class.active]="currentTool === 'draw'" (click)="setTool('draw')">
+          <i class="bi bi-pencil"></i>
+          Dibujar
+        </button>
+      </div>
+      <div class="document-viewer">
+        <div class="document-content" [innerHTML]="sampleContent | lineBreak"></div>
+      </div>
+    </div>
+
+    <!-- Panel derecho - Formulario de evaluación -->
+    <div class="evaluation-panel">
+      <form class="evaluation-form" [formGroup]="evaluationForm">
+        <div *ngFor="let criterion of criteria" class="criterion-section">
+          <h3>{{ criterion.title }}</h3>
+          <p class="criterion-description">
+            {{ criterion.description }}
+          </p>
+
+          <!-- Calificación con escala A-B-C-D -->
+          <div class="rating-section">
+            <label>Calificación</label>
+            <div class="rating-options">
+              <div *ngFor="let option of ratingScale" 
+                   class="rating-option" 
+                   [class.active]="evaluationForm.get('rating_' + criterion.id)?.value === option.value"
+                   (click)="setRating(criterion.id, option.value)">
+                <div class="rating-label">{{ option.label }}</div>
+                <div class="rating-description">{{ option.description }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lista de verificación -->
+          <div class="requirements-section">
+            <h4>Requisitos del criterio</h4>
+            <div class="requirements-list">
+              <div *ngFor="let req of criterion.requirements" class="requirement-item">
+                <label class="requirement-label">
+                  <input type="checkbox" [formControlName]="'req_' + req.id">
+                  {{ req.text }}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Campo de comentarios -->
+          <div class="comments-section">
+            <label>Comentarios y observaciones</label>
+            <textarea 
+              rows="4" 
+              [formControlName]="'comments_' + criterion.id"
+              placeholder="Ingrese sus comentarios sobre este criterio..."></textarea>
+            <div class="error-message" *ngIf="evaluationForm.get('comments_' + criterion.id)?.errors?.['required'] && 
+                                            evaluationForm.get('comments_' + criterion.id)?.touched">
+              <i class="bi bi-exclamation-circle"></i>
+              El campo de comentarios es obligatorio
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Barra de acciones -->
+      <div class="action-bar">
+        <button class="btn-draft" (click)="saveDraft()" [disabled]="savingDraft">
+          <i class="bi" [class.bi-save]="!savingDraft" [class.bi-arrow-repeat]="savingDraft" [class.spin]="savingDraft"></i>
+          {{ savingDraft ? 'Guardando...' : 'Guardar borrador' }}
+        </button>
+        <button class="btn-preview" (click)="previewReport()">
+          <i class="bi bi-eye"></i>
+          Vista previa
+        </button>
+        <button class="btn-submit" (click)="submitEvaluation()" [disabled]="!evaluationForm.valid">
+          <i class="bi bi-check-lg"></i>
+          Enviar evaluación
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

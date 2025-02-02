@@ -12,7 +12,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
       { path: 'inicio', loadChildren: () => import('./features/dashboard/dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'documentos', loadChildren: () => import('./features/documents/documents.module').then(m => m.DocumentsModule) },
-      { path: 'autoestudio', loadChildren: () => import('./features/self-study/self-study.module').then(m => m.SelfStudyModule) }
+      { path: 'autoestudio', loadChildren: () => import('./features/self-study/self-study.module').then(m => m.SelfStudyModule) },
+      { path: 'evaluaciones', loadChildren: () => import('./features/evaluations/evaluations.module').then(m => m.EvaluationsModule) }
     ]
   }
 ];

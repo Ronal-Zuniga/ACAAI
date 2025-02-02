@@ -30,7 +30,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   onMenuClick(route: string): void {
-    if (route === 'documentos' || route === 'autoestudio') {
+    if (['documentos', 'autoestudio', 'evaluaciones'].includes(route)) {
       this.router.navigate(['/dashboard/' + route]);
       this.currentRoute = route;
       return;
