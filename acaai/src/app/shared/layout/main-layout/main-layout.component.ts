@@ -13,6 +13,7 @@ export class MainLayoutComponent implements OnInit {
   currentRoute: string = 'inicio';
   showNotifications: boolean = false;
   showUserMenu: boolean = false;
+  showLogoutModal: boolean = false;
 
   constructor(private router: Router) {
     this.router.events.pipe(
@@ -46,8 +47,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   toggleNotifications(): void {
-    this.showNotifications = !this.showNotifications;
-    this.showUserMenu = false;
+    this.router.navigate(['/dashboard/notificaciones']);
   }
 
   toggleUserMenu(): void {
@@ -55,7 +55,16 @@ export class MainLayoutComponent implements OnInit {
     this.showNotifications = false;
   }
 
-  logout(): void {
+  async logout(): Promise<void> {
+    this.showLogoutModal = true;
+  }
+
+  cancelLogout(): void {
+    this.showLogoutModal = false;
+  }
+
+  confirmLogout(): void {
+    this.showLogoutModal = false;
     this.router.navigate(['/login']);
   }
 }

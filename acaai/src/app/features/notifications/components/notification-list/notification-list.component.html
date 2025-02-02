@@ -1,0 +1,115 @@
+<div class="notifications-container">
+  <!-- Barra superior con filtros y búsqueda -->
+  <div class="notifications-header">
+    <div class="filters-section">
+      <button 
+        class="filter-btn" 
+        [class.active]="currentFilter === 'all'"
+        (click)="onFilterChange('all')">
+        Todas
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="currentFilter === 'unread'"
+        (click)="onFilterChange('unread')">
+        No leídas
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="currentFilter === 'important'"
+        (click)="onFilterChange('important')">
+        Importantes
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="currentFilter === 'archived'"
+        (click)="onFilterChange('archived')">
+        Archivadas
+      </button>
+    </div>
+    <div class="search-section">
+      <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input 
+          type="text" 
+          placeholder="Buscar notificaciones..." 
+          [value]="searchTerm"
+          (input)="onSearch($event)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor principal con lista y estadísticas -->
+  <div class="notifications-content">
+    <!-- Lista de notificaciones -->
+    <div class="notifications-list">
+      <ng-container *ngFor="let group of filteredNotifications | groupBy:'time' | keyvalue">
+        <div class="date-group">
+          <h3 class="group-date">{{ getGroupDate(group.key) }}</h3>
+          <div class="notification-items">
+            <div class="notification-item" 
+                 *ngFor="let notification of group.value"
+                 [class.unread]="!notification.isRead">
+              <!-- Icono según tipo -->
+              <div class="notification-icon" [ngSwitch]="notification.type">
+                <i class="bi" [class.bi-bell-fill]="notification.type === 'reminder'"
+                   [class.bi-file-text-fill]="notification.type === 'document'"
+                   [class.bi-clipboard-data-fill]="notification.type === 'evaluation'"
+                   [class.bi-clock-fill]="notification.type === 'deadline'"></i>
+              </div>
+              
+              <!-- Contenido -->
+              <div class="notification-content">
+                <div class="notification-header">
+                  <h4>{{ notification.title }}</h4>
+                  <span class="time">{{ getTimeAgo(notification.time) }}</span>
+                </div>
+                <p>{{ notification.description }}</p>
+                
+                <!-- Acciones -->
+                <div class="notification-actions">
+                  <button class="action-btn" 
+                          (click)="markAsRead(notification)">
+                    <i class="bi" [class.bi-check2-all]="notification.isRead" [class.bi-check2]="!notification.isRead"></i>
+                    {{ notification.isRead ? 'Marcar como no leída' : 'Marcar como leída' }}
+                  </button>
+                  <button class="action-btn" 
+                          (click)="toggleImportant(notification)">
+                    <i class="bi" [class.bi-star-fill]="notification.isImportant" 
+                       [class.bi-star]="!notification.isImportant"></i>
+                    {{ notification.isImportant ? 'Quitar importancia' : 'Marcar importante' }}
+                  </button>
+                  <button class="action-btn" 
+                          *ngIf="!notification.isArchived"
+                          (click)="archive(notification)">
+                    <i class="bi bi-archive"></i>
+                    Archivar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Panel de estadísticas -->
+    <div class="stats-panel">
+      <h3>Estadísticas</h3>
+      <div class="stats-content">
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.total }}</span>
+          <span class="stat-label">Total de notificaciones</span>
+        </div>
+        <div class="stat-item highlight">
+          <span class="stat-value">{{ stats.unread }}</span>
+          <span class="stat-label">No leídas</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.important }}</span>
+          <span class="stat-label">Importantes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

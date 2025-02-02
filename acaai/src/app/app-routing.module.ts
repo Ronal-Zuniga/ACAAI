@@ -14,7 +14,8 @@ const routes: Routes = [
       { path: 'documentos', loadChildren: () => import('./features/documents/documents.module').then(m => m.DocumentsModule) },
       { path: 'autoestudio', loadChildren: () => import('./features/self-study/self-study.module').then(m => m.SelfStudyModule) },
       { path: 'evaluaciones', loadChildren: () => import('./features/evaluations/evaluations.module').then(m => m.EvaluationsModule) },
-      { path: 'solicitudes', loadChildren: () => import('./features/requests/requests.module').then(m => m.RequestsModule) }
+      { path: 'solicitudes', loadChildren: () => import('./features/requests/requests.module').then(m => m.RequestsModule) },
+      { path: 'notificaciones', loadChildren: () => import('./features/notifications/notifications.module').then(m => m.NotificationsModule) }
     ]
   }
 ];

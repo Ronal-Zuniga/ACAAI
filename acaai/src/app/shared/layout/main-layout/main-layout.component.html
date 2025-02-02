@@ -14,26 +14,6 @@
             <i class="bi bi-bell-fill"></i>
             <span class="notification-badge">5</span>
           </button>
-          <!-- Panel de notificaciones -->
-          <div class="notifications-panel" [class.show]="showNotifications">
-            <h3>Notificaciones</h3>
-            <div class="notifications-list">
-              <div class="notification-item unread">
-                <i class="bi bi-circle-fill"></i>
-                <div class="notification-content">
-                  <p>Nueva evaluación asignada</p>
-                  <span>Hace 1 hora</span>
-                </div>
-              </div>
-              <div class="notification-item unread">
-                <i class="bi bi-circle-fill"></i>
-                <div class="notification-content">
-                  <p>Comentario nuevo en documento</p>
-                  <span>Hace 2 horas</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="user-info" (click)="logout()">
           <div class="user-avatar">
@@ -89,6 +69,12 @@
             <span>Configuración</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Cerrar Sesión</span>
+          </a>
+        </li>
       </ul>
     </nav>
 
@@ -96,5 +82,30 @@
     <main class="content-area">
       <router-outlet></router-outlet>
     </main>
+  </div>
+
+  <!-- Modal de confirmación de cierre de sesión -->
+  <div class="modal-overlay" *ngIf="showLogoutModal" (click)="cancelLogout()">
+    <div class="modal-dialog" (click)="$event.stopPropagation()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <i class="bi bi-box-arrow-right"></i>
+          <h4>Cerrar Sesión</h4>
+        </div>
+        <div class="modal-body">
+          <p>¿Está seguro que desea cerrar su sesión?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="cancelLogout()">
+            <i class="bi bi-x"></i>
+            Cancelar
+          </button>
+          <button class="btn-confirm" (click)="confirmLogout()">
+            <i class="bi bi-box-arrow-right"></i>
+            Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
